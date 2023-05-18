@@ -1,10 +1,8 @@
 package com.med.medicalcentrecourse.service;
 
 import com.med.medicalcentrecourse.model.Appointment;
-import com.med.medicalcentrecourse.model.Diagnosis;
 import com.med.medicalcentrecourse.model.Patient;
 import com.med.medicalcentrecourse.repository.AppointmentRepository;
-import com.med.medicalcentrecourse.repository.DiagnosisRepository;
 import com.med.medicalcentrecourse.repository.PatientsRepository;
 import com.med.medicalcentrecourse.util.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
@@ -19,7 +17,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class AppointmentServiceBean implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
-    private final DiagnosisRepository diagnosisRepository;
     private final PatientsRepository patientsRepository;
     public Appointment create(Appointment appointment) {
         if(checkDate(appointment.getActionTime()))
@@ -28,9 +25,6 @@ public class AppointmentServiceBean implements AppointmentService {
     }
     public Appointment getAppointmentByID(Integer id){
         return appointmentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-    }
-    public List<Diagnosis> getAllDiagnosis(){
-        return diagnosisRepository.findAll();
     }
     public List<Appointment> getAppointmentByPersonID(Integer id){
         Patient patient1 = patientsRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
@@ -47,6 +41,8 @@ public class AppointmentServiceBean implements AppointmentService {
                             checkDate(appointment.getActionTime())
                                     ? entity.getActionTime()
                                     : appointment.getActionTime());
+                    entity.setDescription(appointment.getDescription());
+                    entity.setTreatment(appointment.getTreatment());
                     return appointmentRepository.save(entity);
                 })
                 .orElseThrow(ResourceNotFoundException::new);
@@ -57,14 +53,22 @@ public class AppointmentServiceBean implements AppointmentService {
     public void removeAll() {
         appointmentRepository.deleteAll();
     }
+
     public Set<String> getAllDiagnoseByPatientID(Integer id){
-        Set<Diagnosis> list = new HashSet<>();
-        List<Appointment> appointments = getAppointmentByPersonID(id);
-        appointments.forEach(e ->  list.addAll(e.getDiagnosis()));
-        Set<String> stringSet = new HashSet<>();
-        list.forEach(e -> stringSet.add(e.getDescription()));
+      List<Appointment> list= getAppointmentByPersonID(id);
+      Set<String> stringSet = new HashSet<>();
+        for (Appointment l:
+             list) {
+            stringSet.add(l.getDescription());
+        }
         return stringSet;
     }
+
+    @Override
+    public List<Appointment> getAllAppointmentBeforeNow() {
+        return appointmentRepository.findAppointmentsByActionTimeBefore(LocalDateTime.now());
+    }
+
     private boolean checkDate(LocalDateTime date){
         return date.getYear() < LocalDateTime.now().minusYears(100).getYear()
                 || date.getYear() > LocalDateTime.now().plusYears(30).getYear();

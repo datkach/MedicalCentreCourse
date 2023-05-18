@@ -23,8 +23,7 @@ public class Appointment {
     private Doctor doctors;
     @Column(name = "action_time", nullable = false)
     private LocalDateTime actionTime;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "appointment_id")
-    private Set<Diagnosis> diagnosis = new HashSet<>();
+    private String description;
+    private String treatment;
 }
 

@@ -18,12 +18,14 @@
   </select>
   <br>
   <label for="actionTime">Action Time:</label>
-  <input type="datetime-local" id="actionTime" name="actionTime" required>
+  <input type="datetime-local" id="actionTime" th:field="*{actionTime}" >
   <br>
-  <label for="diagnosis">Diagnosis:</label>
-  <select id="diagnosis" name="diagnosis" multiple>
-    <option th:each="diagnosis : ${allDiagnoses}" th:value="${diagnosis.id}" th:text="${diagnosis.description}"></option>
-  </select>
+<!--  <div>-->
+<!--    <label for="description">Description:</label>-->
+<!--    <input type="text" id="description" th:field="*{description}" >-->
+<!--  </div>-->
+<!--  <label for="treatment">Treatment:</label>-->
+<!--  <input type="text" id="treatment" th:field="*{treatment}" >-->
   <br>
   <input type="submit" value="Save">
 </form>

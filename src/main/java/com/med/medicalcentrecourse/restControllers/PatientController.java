@@ -1,7 +1,6 @@
 package com.med.medicalcentrecourse.restControllers;
 
 import com.med.medicalcentrecourse.model.Patient;
-import com.med.medicalcentrecourse.model.enums.Specialization;
 import com.med.medicalcentrecourse.service.PatientsService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

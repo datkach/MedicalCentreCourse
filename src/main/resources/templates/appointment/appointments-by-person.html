@@ -22,11 +22,8 @@
     <td th:text="${appointment.patients.firstName}"></td>
     <td th:text="${appointment.doctors.name}"></td>
     <td th:text="${appointment.actionTime}"></td>
-    <td>
-      <ul>
-        <li th:each="diagnosis : ${appointment.diagnosis}" th:text="${diagnosis.description}"></li>
-      </ul>
-    </td>
+    <td th:text="${appointment.description}" ></td>
+    <td th:text="${appointment.treatment}" ></td>
   </tr>
   </tbody>
 </table>

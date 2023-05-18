@@ -1,7 +1,6 @@
 package com.med.medicalcentrecourse.service;
 
 import com.med.medicalcentrecourse.model.Patient;
-import com.med.medicalcentrecourse.model.enums.Specialization;
 
 import java.util.List;
 

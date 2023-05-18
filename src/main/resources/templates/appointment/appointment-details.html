@@ -6,31 +6,12 @@
 </head>
 <body>
 <h1>Appointment Details</h1>
-<table>
-  <tr>
-    <th>ID:</th>
-    <td th:text="${appointment.id}"></td>
-  </tr>
-  <tr>
-    <th>Patient Name:</th>
-    <td th:text="${appointment.patients.name}"></td>
-  </tr>
-  <tr>
-    <th>Doctor Name:</th>
-    <td th:text="${appointment.doctors.name}"></td>
-  </tr>
-  <tr>
-    <th>Action Time:</th>
-    <td th:text="${appointment.actionTime}"></td>
-  </tr>
-  <tr>
-    <th>Diagnosis:</th>
-    <td>
-      <ul>
-        <li th:each="diagnosis : ${appointment.diagnosis}" th:text="${diagnosis.description}"></li>
-      </ul>
-    </td>
-  </tr>
-</table>
+<p th:text="'ID: ' + ${appointment.id}"></p>
+<p th:text="'Patients: ' + ${appointment.patients.lastName} + ${appointment.patients.firstName}"></p>
+<p th:text="'Doctor: ' + ${appointment.doctors.name} + ${appointment.doctors.surname}"></p>
+<p th:text="'Appointment time: ' + ${appointment.actionTime}"></p>
+<a th:href="@{/appointments}" class="button">Back to List</a>
+<a th:href="@{/appointment/update/{id}(id=${appointment.id})}" class="button">Edit</a>
+<a th:href="@{/appointment/delete/{id}(id=${appointment.id})}" class="button" onclick="return confirm('Are you sure you want to delete this doctor?')">Delete</a>
 </body>
 </html>

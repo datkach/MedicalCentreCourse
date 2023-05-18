@@ -1,7 +1,6 @@
 package com.med.medicalcentrecourse.service;
 
 import com.med.medicalcentrecourse.model.Appointment;
-import com.med.medicalcentrecourse.model.Diagnosis;
 
 import java.util.List;
 import java.util.Set;
@@ -15,5 +14,5 @@ public interface AppointmentService {
      void removeById(Integer id);
      void removeAll();
     Set<String> getAllDiagnoseByPatientID(Integer id);
-    public List<Diagnosis> getAllDiagnosis();
+    List<Appointment> getAllAppointmentBeforeNow();
     }
