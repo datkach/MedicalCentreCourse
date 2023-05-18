@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Appointment Details</title>
+</head>
+<body>
+<h2>Appointment Details</h2>
+<p>ID: <span th:text="${appointment.id}"></span></p>
+<p>Action Time: <span th:text="${appointment.actionTime}"></span></p>
+<p>Doctor: <span th:text="${appointment.doctors.name}"></span></p>
+<p>Patient: <span th:text="${appointment.patients.firstName}"></span></p>
+</body>
+</html>

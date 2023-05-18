@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor Search For Name</title>
+</head>
+<body>
+<h2>Search Doctors For Name</h2>
+<form th:object="${searchForm}" method="post" action="/doctors/searchBySpecialization">
+  <select id="specialization" th:field="*{specialization}" required>
+    <option value="">Select specialization</option>
+    <option th:each="specialization : ${T(com.med.medicalcentrecourse.model.enums.Specialization).values()}"
+            th:value="${specialization}" th:text="${specialization}"></option>
+  </select>
+  <button type="submit">Search</button>
+</form>
+</body>
+</html>

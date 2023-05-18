@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Appointment Details</title>
+</head>
+<body>
+<h1>Appointment Details</h1>
+<table>
+  <tr>
+    <th>ID:</th>
+    <td th:text="${appointment.id}"></td>
+  </tr>
+  <tr>
+    <th>Patient Name:</th>
+    <td th:text="${appointment.patients.name}"></td>
+  </tr>
+  <tr>
+    <th>Doctor Name:</th>
+    <td th:text="${appointment.doctors.name}"></td>
+  </tr>
+  <tr>
+    <th>Action Time:</th>
+    <td th:text="${appointment.actionTime}"></td>
+  </tr>
+  <tr>
+    <th>Diagnosis:</th>
+    <td>
+      <ul>
+        <li th:each="diagnosis : ${appointment.diagnosis}" th:text="${diagnosis.description}"></li>
+      </ul>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

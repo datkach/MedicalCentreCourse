@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Doctor</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Update Doctor</h1>
+<form th:action="@{/doctors/update/{id}(id=${doctor.id})}" th:object="${doctor}" method="post">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" required>
+  </div>
+  <div>
+    <label for="surname">Surname:</label>
+    <input type="text" id="surname" th:field="*{surname}" required>
+  </div>
+  <div>
+    <label for="birthdayDate">Birthday Date:</label>
+    <input type="date" id="birthdayDate" th:field="*{birthdayDate}" required>
+  </div>
+  <div>
+    <label for="specialization">Specialization:</label>
+    <select id="specialization" th:field="*{specialization}" required>
+      <option value="">Select specialization</option>
+      <option th:each="specialization : ${T(com.med.medicalcentrecourse.model.enums.Specialization).values()}"
+              th:value="${specialization}" th:text="${specialization}"></option>
+    </select>
+  </div>
+  <div>
+    <button type="submit">Update</button>
+  </div>
+</form>
+</body>
+</html>
