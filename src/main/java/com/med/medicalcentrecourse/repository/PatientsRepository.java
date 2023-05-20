@@ -11,4 +11,7 @@ import java.util.List;
 public interface PatientsRepository extends JpaRepository<Patient,Integer> {
     List<Patient> findAllByDoctorSurname(String doctorName);
     List<Patient> findAllByOrderByLastNameAsc();
+    List<Patient> findAllByLastName(String lastName);
+    List<Patient> findAllByFirstName(String firstName);
+    List<Patient> findAllByPhoneNumber(String number);
 }

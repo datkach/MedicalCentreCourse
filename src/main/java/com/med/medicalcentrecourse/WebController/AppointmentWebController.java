@@ -22,6 +22,7 @@ public class AppointmentWebController {
     private final DoctorService doctorServiceBean;
     private final PatientsService patientsServiceBean;
 //Создать Appointment
+
     @PostMapping("/appointment")
     public String createAppointment(@ModelAttribute("appointment") Appointment appointment) {
         validateAppointment(appointment);

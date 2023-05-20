@@ -45,6 +45,21 @@ public class PatientsServiceBean implements PatientsService{
     }
 
     @Override
+    public List<Patient> getAllPatientsByFirstName(String name) {
+        return patientsRepository.findAllByFirstName(name);
+    }
+
+    @Override
+    public List<Patient> getAllPatientByLastName(String surname) {
+        return patientsRepository.findAllByLastName(surname);
+    }
+
+    @Override
+    public List<Patient> getAllPatientByPhoneNumber(String phoneNumber) {
+        return patientsRepository.findAllByPhoneNumber(phoneNumber);
+    }
+
+    @Override
     public Patient updateById(Integer id, Patient patient) {
         return patientsRepository.findById(id)
                 .map(entity -> {
