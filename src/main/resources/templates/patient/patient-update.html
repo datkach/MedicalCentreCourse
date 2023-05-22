@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Patient</title>
+</head>
+<body>
+<h2>Update Patient</h2>
+<form th:action="@{/patients/update/{id}(id=${patient.id})}" th:object="${patient}" method="post">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" th:value="${patient.firstName}" required>
+    <br>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" th:value="${patient.lastName}" required>
+    <br>
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" th:value="${patient.address}" required>
+    <br>
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" th:value="${patient.phoneNumber}" required>
+    <br>
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender">
+        <option value="MALE" th:selected="${patient.gender == 'MALE'}">Male</option>
+        <option value="FEMALE" th:selected="${patient.gender == 'FEMALE'}">Female</option>
+        <option value="OTHER" th:selected="${patient.gender == 'OTHER'}">Other</option>
+    </select>
+    <br>
+    <label for="bloodGroup">Blood Group:</label>
+    <input type="text" id="bloodGroup" name="bloodGroup" th:value="${patient.bloodGroup}" required>
+    <br>
+    <label for="birthDate">Birth Date:</label>
+    <input type="date" id="birthDate" name="birthDate" th:value="${patient.birthDate}" required>
+    <br>
+    <label for="doctorSurname">Doctor Surname:</label>
+    <input type="text" id="doctorSurname" name="doctorSurname" th:value="${patient.doctorSurname}">
+    <br>
+    <input type="submit" value="Save">
+</form>
+</body>
+</html>

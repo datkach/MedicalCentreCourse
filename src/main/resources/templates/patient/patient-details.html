@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Patient Details</title>
 </head>
 <body>
-
+<h2>Patient Details</h2>
+<p>ID: <span th:text="${patient.id}"></span></p>
+<p>First Name: <span th:text="${patient.firstName}"></span></p>
+<p>Last Name: <span th:text="${patient.lastName}"></span></p>
+<p>Address: <span th:text="${patient.address}"></span></p>
+<p>Phone Number: <span th:text="${patient.phoneNumber}"></span></p>
+<p>Gender: <span th:text="${patient.gender}"></span></p>
+<p>Blood Group: <span th:text="${patient.bloodGroup}"></span></p>
+<p>Birth Date: <span th:text="${patient.birthDate}"></span></p>
+<p>Doctor Surname: <span th:text="${patient.doctorSurname}"></span></p>
+<a th:href="@{/patients}" class="button">Back to All Patients</a>
+<a th:href="@{/patients/update/{id}(id=${patient.id})}" class="button">Edit</a>
+<a th:href="@{/patients/delete/{id}(id=${patient.id})}" class="button" onclick="return confirm('Are you sure you want to delete this patient?')">Delete</a>
 </body>
 </html>

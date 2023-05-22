@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Search Patients by Phone Number</title>
 </head>
 <body>
-
+<h2>Search Patients by Phone Number</h2>
+<form th:action="@{/patients/searchByPhoneNumber}" th:object="${searchForm}" method="post">
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" required>
+    <br>
+    <input type="submit" value="Search">
+</form>
 </body>
 </html>
