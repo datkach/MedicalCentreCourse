@@ -1,0 +1,279 @@
+<!-- doctor-details.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Update</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+      body {
+            margin: 0;
+            font-family: 'IBM Plex Sans', sans-serif;
+      }
+      *{
+  
+            margin:0; padding:0;
+            box-sizing: border-box;
+            outline: none; border:none;
+            text-transform: capitalize;
+            transition: all .2s linear;
+        }
+      ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 20%;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+      }
+      
+      li a {
+            display: block;
+            color: #a8a8a8;
+            padding: 8px 16px;
+            text-decoration: none;
+      }
+      li a.logo {
+            display: block;
+            color: #CC14FF;
+            padding: 24px 16px;
+            font-weight: bold;
+        }
+        li a.logo span{
+            font-size: 24px;
+            font-weight: bold;
+        }
+          li a.active {
+              background-color: #CC14FF;
+              color: white;
+          }
+
+      li a:hover:not(.active, .logo) {
+            background-color: #c0c0c0;
+            color: white;
+      }
+      .content-container{
+            margin-left:20%;
+            padding:1px 16px;
+            height:100%;
+      }
+      i {
+            padding-right: 12px;
+      
+      }
+      .topnav{
+            overflow: hidden;
+      }
+          .topnav a {
+              float: left;
+              display: block;
+              color: black;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+              font-size: 14px;
+              border-bottom: 3px solid transparent;
+          }
+              .topnav a:hover {
+                  border-bottom: 3px solid #CC14FF;
+              }
+
+              .topnav a.active {
+                  border-bottom: 3px solid #CC14FF;
+                  font-weight: bold;
+                  
+              }
+        h1{
+            font-size: 24px;
+            margin-top: 16px;
+            margin-left: 16px;
+        }
+        .container form{
+            padding:16px;
+            width:700px;
+        }
+
+        .container form .row{
+            display: flex;
+            flex-wrap: wrap;
+            gap:15px;
+        }
+
+        .container form .row .col{
+            flex-direction: column;
+            flex:1 1 250px;
+        }
+
+        .container form .row .col .inputBox{
+            margin:15px 0;
+        }    
+       
+       
+        input[type=text],input[type=date], select {
+            width: 100%;
+            font-size: 14px;
+            padding: 12px 16px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+      input[type=submit] {
+          width: 100%;
+          background-color: #CC14FF;
+          color: white;
+          padding: 12px 16px;
+          margin-top: 24px;
+          border: none;
+          font-size: 16px;
+          transition-duration: 0.4s;
+          border-radius: 3px;
+          cursor: pointer;
+      }
+        .container form .row .col .inputBox input:focus{
+            border:1px solid #000;
+        }
+
+        .container form .row .col {
+            display: flex;
+            gap:15px;
+        }
+
+        .container form .row .col .inputBox{
+            margin-top: 5px;
+        }
+
+      .container form .button {
+          border: none;
+          color: white;
+          padding: 12px 16px;
+          text-decoration: none;
+          margin-top: 24px;
+          margin-right: 6px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+          border-radius: 3px;
+          width: 100%;
+          font-size: 16px;
+          background: #CC14FF;
+          margin-top: 24px;
+      }
+
+          .container form .button:hover {
+              background-color: #9E0CB8;
+          }
+         /*Button details
+        .button {
+            background-color: #5f5f5f; 
+            border: none;
+            color: white;
+            padding: 4px 16px;
+            text-decoration: none;
+            margin-top: 24px;
+            margin-right: 6px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        input[type=submit]:hover, .button:hover {
+            background-color: #3b3b3b;
+        }
+        span{
+            font-weight: bold;
+        }*/
+       
+        
+  </style>
+</head>
+<body>
+  <ul>
+      <li><a class="logo" th:href="@{/}"><i class="fa-solid fa-staff-snake fa-2xl"></i><span>MHS</span></a></li>
+      <li><a th:href="@{/}"><i class="fa-solid fa-house"></i></i>Main page</a></li>
+      <li><a  th:href="@{/doctors}"><i class="fa-solid fa-user-doctor"></i>Doctor</a></li>
+      <li><a class="active"  th:href="@{/patients}"><i class="fa-solid fa-user-injured"></i>Patient</a></li>
+      <li><a th:href="@{/appointments}"><i class="fa-solid fa-sheet-plastic"></i>Appointment</a></li>
+  </ul>
+  <div class="content-container">
+    <div class="topnav">
+        <a  th:href="@{/patients}"><i class="fa-solid fa-arrow-left"></i>Back To List</a>
+        <a th:href="@{/patients/create}">Create New Patient</a>
+        <a  th:href="@{/patients/searchByName}">Find By Name</a>
+        <a th:href="@{/patients/searchBySurname}">Find By Surname</a>
+        <a th:href="@{/patients/searchByPhoneNumber}">Find By Phone</a>
+        <a th:href="@{/patients/searchPatientsByDoctor}">Find By Surname Doctor</a>
+    </div>
+    <h1>Update Patient</h1>
+  <div class="container">
+      
+      <form th:action="@{/patients/update/{id}(id=${patient.id})}" th:object="${patient}" method="post">
+
+          <div class="row">
+
+              <div class="col">
+
+                  <div class="inputBox">
+                      <label for="firstName">First Name:</label>
+                      <input type="text" id="firstName" name="firstName" th:value="${patient.firstName}" placeholder="Enter first name" required>
+                  </div>
+
+                  <div class="inputBox">
+                      <label for="lastName">Last Name:</label>
+                      <input type="text" id="lastName" name="lastName" th:value="${patient.lastName}" placeholder="Enter last name" required>
+                  </div>
+
+                  <div class="inputBox">
+                      <label for="address">Address:</label>
+                      <input type="text" id="address" name="address" th:value="${patient.address}" placeholder="Enter address"required>
+                  </div>
+                  <div class="inputBox">
+                      <label for="phoneNumber">Phone Number:</label>
+                      <input type="text" id="phoneNumber" name="phoneNumber" th:value="${patient.phoneNumber}" placeholder="Enter phone number"required>
+                  </div>
+              </div>
+
+              <div class="col">
+
+                  <div class="inputBox">
+                      <label for="gender">Gender:</label>
+                      <select id="gender" name="gender">
+                          <option value="MALE" th:selected="${patient.gender == 'MALE'}">Male</option>
+                          <option value="FEMALE" th:selected="${patient.gender == 'FEMALE'}">Female</option>
+                          <option value="OTHER" th:selected="${patient.gender == 'OTHER'}">Other</option>
+                      </select>
+                  </div>
+                  <div class="inputBox">
+                      <label for="bloodGroup">Blood Group:</label>
+                      <input type="text" id="bloodGroup" name="bloodGroup" th:value="${patient.bloodGroup}" placeholder="Enter blood group" required>
+                  </div>
+                  <div class="inputBox">
+                      <label for="birthDate">Birth Date:</label>
+                      <input type="date" id="birthDate" name="birthDate" th:value="${patient.birthDate}" required>
+                  </div>
+                  <div class="inputBox">
+                      <label for="doctorSurname">Doctor Surname:</label>
+                      <input type="text" id="doctorSurname" name="doctorSurname" th:value="${patient.doctorSurname}" placeholder="Enter doctor surname" required>
+                  </div>
+
+                
+
+              </div>
+      
+          </div>
+
+        
+          <input class="button" type="submit" value="Update">
+
+      </form>
+
+  </div>    
+  </div>
+</body>
+</html>

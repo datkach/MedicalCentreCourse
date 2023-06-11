@@ -21,20 +21,20 @@ public class DoctorWebController {
     public String getAllDoctors(Model model) {
         List<Doctor> doctors = doctorService.getALlDoctors();
         model.addAttribute("doctors", doctors);
-        return "doctor/doctors";
+        return "doctors";
     }
 // получаем доктора по id
     @GetMapping("/doctors/{id}")
     public String getDoctorById(@PathVariable Integer id, Model model) {
         Doctor doctor = doctorService.getDoctorByID(id);
         model.addAttribute("doctor", doctor);
-        return "doctor/doctor-details";
+        return "doctor-details";
     }
     //пошук по фамилии
     @GetMapping("/doctors/searchBySurname")
 public String searchDoctorsBySurname(Model model) {
     model.addAttribute("searchForm", new DoctorSearchForm());
-    return "doctor/doctor-search-surname";
+    return "doctor-search-surname";
 }
 
     @PostMapping("/doctors/searchBySurname")
@@ -42,13 +42,13 @@ public String searchDoctorsBySurname(Model model) {
         String surname = searchForm.getSurname();
         List<Doctor> doctors = doctorService.getAllDoctorsBySurname(surname);
         model.addAttribute("doctors", doctors);
-        return "doctor/doctor-search-results";
+        return "doctor-search-results";
     }
     //пошук по имени
     @GetMapping("/doctors/searchByName")
     public String searchDoctorsByName(Model model) {
         model.addAttribute("searchForm", new DoctorSearchForm());
-        return "doctor/doctor-search-name";
+        return "doctor-search-name";
     }
 
     @PostMapping("/doctors/searchByName")
@@ -56,26 +56,26 @@ public String searchDoctorsBySurname(Model model) {
         String name = searchForm.getName();
         List<Doctor> doctors = doctorService.getAllDoctorsByName(name);
         model.addAttribute("doctors", doctors);
-        return "doctor/doctor-search-results";
+        return "doctor-search-results";
     }
     // пошук по специализации
     @GetMapping("doctors/searchBySpecialization")
     public String searchDoctorsBySpecialization(Model model) {
         model.addAttribute("searchForm" , new DoctorSearchForm());
-        return "doctor/doctor-search-specialization";
+        return "doctor-search-specialization";
     }
     @PostMapping("/doctors/searchBySpecialization")
     public String processDoctorSearchBySpecialization(@ModelAttribute("searchForm") DoctorSearchForm searchForm, Model model){
         Specialization specialization = searchForm.getSpecialization();
         List<Doctor> doctors = doctorService.getAllDoctorsBySpecialization(specialization);
         model.addAttribute("doctors",doctors);
-        return "doctor/doctor-search-results";
+        return "doctor-search-results";
     }
     //форма создания и её обработка
     @GetMapping("/doctors/create")
     public String showCreateDoctorForm(Model model) {
         model.addAttribute("doctor", new Doctor());
-        return "doctor/doctor-form";
+        return "doctor-form";
     }
     @PostMapping("/doctors/create")
     public String processCreateDoctorForm(@ModelAttribute("doctor") Doctor doctor) {
@@ -87,7 +87,7 @@ public String searchDoctorsBySurname(Model model) {
     public String showUpdateDoctorForm(@PathVariable Integer id, Model model) {
         Doctor doctor = doctorService.getDoctorByID(id);
         model.addAttribute("doctor", doctor);
-        return "doctor/doctor-update";
+        return "doctor-update";
     }
     @PostMapping("/doctors/update/{id}")
     public String processUpdateDoctorForm(@PathVariable Integer id, @ModelAttribute("doctor") Doctor doctor) {

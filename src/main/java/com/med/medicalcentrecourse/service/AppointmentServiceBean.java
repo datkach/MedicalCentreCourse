@@ -63,8 +63,6 @@ public class AppointmentServiceBean implements AppointmentService {
         }
         return stringSet;
     }
-
-    @Override
     public List<Appointment> getAllAppointmentBeforeNow() {
         return appointmentRepository.findAppointmentsByActionTimeBefore(LocalDateTime.now());
     }

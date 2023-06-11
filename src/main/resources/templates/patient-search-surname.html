@@ -1,0 +1,172 @@
+<!-- doctor-details.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Patients by Surname</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+      body {
+            margin: 0;
+            font-family: 'IBM Plex Sans', sans-serif;
+      }
+
+      ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 20%;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+      }
+      
+      li a {
+            display: block;
+            color: #a8a8a8;
+            padding: 8px 16px;
+            text-decoration: none;
+      }
+      li a.logo {
+            display: block;
+            color: #CC14FF;
+            padding: 24px 16px;
+            font-weight: bold;
+        }
+        li a.logo span{
+            font-size: 24px;
+            font-weight: bold;
+        }
+          li a.active {
+              background-color: #CC14FF;
+              color: white;
+          }
+
+      li a:hover:not(.active, .logo) {
+            background-color: #c0c0c0;
+            color: white;
+      }
+      .content-container{
+            margin-left:20%;
+            padding:1px 16px;
+            height:100%;
+      }
+      i {
+            padding-right: 12px;
+      
+      }
+      .topnav{
+            overflow: hidden;
+      }
+          .topnav a {
+              float: left;
+              display: block;
+              color:  black;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+              font-size: 14px;
+              border-bottom: 3px solid transparent;
+          }
+              .topnav a:hover {
+                  border-bottom: 3px solid #CC14FF;
+              }
+
+              .topnav a.active {
+                  border-bottom: 3px solid #CC14FF;
+                  font-weight: bold;
+                 
+              }
+        h1{
+            font-size: 24px;
+        }
+
+       .surname-search{
+            padding:0px 16px;
+            width: 40%;
+            
+       }
+       
+        input[type=search] {
+            width: 70%;
+            font-size: 14px;
+            padding: 12px 16px;
+            margin: 8px 4px 0px 0px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+      input[type=submit] {
+          width: 25%;
+          background-color: #CC14FF;
+          color: white;
+          padding: 12px 16px;
+          margin: 8px 0;
+          border: none;
+          font-size: 16px;
+          transition-duration: 0.4s;
+          border-radius: 3px;
+          cursor: pointer;
+      }
+
+         /*Button details*/
+      .button {
+          background-color: #CC14FF;
+          border: none;
+          color: white;
+          padding: 4px 16px;
+          text-decoration: none;
+          margin-top: 24px;
+          margin-right: 6px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+          border-radius: 3px;
+      }
+
+          input[type=submit]:hover, .button:hover {
+              background-color: #9E0CB8;
+          }
+        /*span{
+            font-weight: bold;
+        }*/
+        .button-container{
+            margin-top: 24px;
+        }
+
+  </style>
+</head>
+<body>
+  <ul>
+      <li><a class="logo" th:href="@{/}"><i class="fa-solid fa-staff-snake fa-2xl"></i><span>MHS</span></a></li>
+      <li><a th:href="@{/}"><i class="fa-solid fa-house"></i></i>Main page</a></li>
+      <li><a  th:href="@{/doctors}"><i class="fa-solid fa-user-doctor"></i>Doctor</a></li>
+      <li><a class="active"  th:href="@{/patients}"><i class="fa-solid fa-user-injured"></i>Patient</a></li>
+      <li><a th:href="@{/appointments}"><i class="fa-solid fa-sheet-plastic"></i>Appointment</a></li>
+  </ul>
+  <div class="content-container">
+    <div class="topnav">
+        <a   th:href="@{/patients}">Patients</a>
+        <<a th:href="@{/patients/create}">Create New Patient</a>
+        <a  th:href="@{/patients/searchByName}">Find By Name</a>
+        <a class="active" th:href="@{/patients/searchBySurname}">Find By Surname</a>
+        <a th:href="@{/patients/searchByPhoneNumber}">Find By Phone</a>
+        <a th:href="@{/patients/searchPatientsByDoctor}">Find By Surname Doctor</a>
+    </div>
+    <div class="surname-search">
+        <h1>Search Patients by Name</h1>
+        <form th:action="@{/patients/searchBySurname}" th:object="${searchForm}" method="post">
+            <input type="search" id="lastName" th:field="*{lastName}" name="lastName" placeholder="Enter surname" required>
+            <input class="button" type="submit" value="Search">
+            
+        </form>
+
+    </div>
+  </div>
+</body>
+</html>

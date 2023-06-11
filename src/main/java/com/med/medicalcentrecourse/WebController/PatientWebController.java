@@ -20,20 +20,20 @@ public class PatientWebController {
     public String getAllPatients(Model model) {
         List<Patient> patients = patientsService.getAllPatients();
         model.addAttribute("patients", patients);
-        return "patient/patients";
+        return "patients";
     }
     // получаем доктора по id
     @GetMapping("/patients/{id}")
     public String getPatientById(@PathVariable Integer id, Model model) {
         Patient patient = patientsService.getPatientByID(id);
         model.addAttribute("patient", patient);
-        return "patient/patient-details";
+        return "patient-details";
     }
     //пошук по фамилии
     @GetMapping("/patients/searchBySurname")
     public String searchPatientsBySurname(Model model) {
         model.addAttribute("searchForm", new PatientSearchForm());
-        return "patient/patient-search-surname";
+        return "patient-search-surname";
     }
 
     @PostMapping("/patients/searchBySurname")
@@ -41,13 +41,13 @@ public class PatientWebController {
         String surname = searchForm.getLastName();
         List<Patient> patients = patientsService.getAllPatientByLastName(surname);
         model.addAttribute("patients", patients);
-        return "patient/patient-search-results";
+        return "patient-search-results";
     }
     //пошук по имени
     @GetMapping("/patients/searchByName")
     public String searchPatientsByName(Model model) {
         model.addAttribute("searchForm", new PatientSearchForm());
-        return "patient/patient-search-name";
+        return "patient-search-name";
     }
 
     @PostMapping("/patients/searchByName")
@@ -55,38 +55,38 @@ public class PatientWebController {
         String name = searchForm.getFirstName();
         List<Patient> patients = patientsService.getAllPatientsByFirstName(name);
         model.addAttribute("patients", patients);
-        return "patient/patient-search-results";
+        return "patient-search-results";
     }
     // пошук по специализации
     @GetMapping("patients/searchByPhoneNumber")
     public String searchPatientsByPhoneNumber(Model model) {
         model.addAttribute("searchForm" , new PatientSearchForm());
-        return "patient/patient-search-phone";
+        return "patient-search-phone";
     }
     @PostMapping("/patients/searchByPhoneNumber")
     public String processPatientsByPhoneNumber(@ModelAttribute("searchForm") PatientSearchForm searchForm, Model model){
         String phoneNumber = searchForm.getPhoneNumber();
         List<Patient> patients = patientsService.getAllPatientByPhoneNumber(phoneNumber);
         model.addAttribute("patients",patients);
-        return "patient/patient-search-results";
+        return "patient-search-results";
     }
     @GetMapping("patients/searchPatientsByDoctor")
     public String searchDoctorByPatientCart(Model model) {
         model.addAttribute("searchForm" , new PatientSearchForm());
-        return "patient/patient-search-doctor";
+        return "patient-search-doctor";
     }
     @PostMapping("/patients/searchPatientsByDoctor")
     public String processDoctorByPatientCart(@ModelAttribute("searchForm") PatientSearchForm searchForm, Model model){
         String doctorSurname = searchForm.getDoctorSurname();
         List<Patient> patients = patientsService.getAllPatientsByDoctor(doctorSurname);
         model.addAttribute("patients",patients);
-        return "patient/patient-search-results";
+        return "patient-search-results";
     }
     //форма создания и её обработка
     @GetMapping("/patients/create")
     public String showCreatePatientForm(Model model) {
         model.addAttribute("patient", new Patient());
-        return "patient/patient-form";
+        return "patient-form";
     }
     @PostMapping("/patients/create")
     public String processCreatePatientForm(@ModelAttribute("patient") Patient patient) {
@@ -97,7 +97,7 @@ public class PatientWebController {
     public String showUpdatePatientsForm(@PathVariable Integer id, Model model) {
         Patient patient = patientsService.getPatientByID(id);
         model.addAttribute("patient", patient);
-        return "patient/patient-update";
+        return "patient-update";
     }
     @PostMapping("/patients/update/{id}")
     public String processUpdatePatientForm(@PathVariable Integer id, @ModelAttribute("patient") Patient patient) {

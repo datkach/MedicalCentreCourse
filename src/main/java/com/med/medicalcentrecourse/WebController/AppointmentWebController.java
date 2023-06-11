@@ -3,6 +3,7 @@ package com.med.medicalcentrecourse.WebController;
 import com.med.medicalcentrecourse.model.Appointment;
 import com.med.medicalcentrecourse.model.Doctor;
 import com.med.medicalcentrecourse.model.Patient;
+import com.med.medicalcentrecourse.model.PatientSearchForm;
 import com.med.medicalcentrecourse.service.AppointmentService;
 import com.med.medicalcentrecourse.service.DoctorService;
 import com.med.medicalcentrecourse.service.PatientsService;
@@ -34,41 +35,60 @@ public class AppointmentWebController {
     public String getAppointmentById(@PathVariable("id") Integer id, Model model) {
         Appointment appointment = appointmentService.getAppointmentByID(id);
         model.addAttribute("appointment", appointment);
-        return "appointment/appointment-details";
+        return "appointment-details";
     }
     @GetMapping("/appointment/last/{id}")
     public String getLastAppointmentById(@PathVariable("id") Integer id, Model model) {
         Appointment appointment = appointmentService.getAppointmentByID(id);
         model.addAttribute("appointment", appointment);
-        return "appointment/appointment-details-last";
+        return "appointment-details-last";
     }
 //Получить все записи
     @GetMapping("/appointments")
     public String getAllAppointments(Model model) {
         List<Appointment> appointments = appointmentService.getALlAppointment();
         model.addAttribute("appointments", appointments);
-        return "appointment/appointments";
+        return "appointments";
     }
     //Получить просроченные записи чтоб обновить назначение
     @GetMapping("/appointments/before")
     public String getAllAppointmentsBefore(Model model) {
         List<Appointment> appointments = appointmentService.getAllAppointmentBeforeNow();
-        model.addAttribute("appointments", appointments);
-        return "appointment/appointments-last";
+        model.addAttribute("appointmentsBefore", appointments);
+        return "appointments-last";
     }
 //Получить записи по id пациента
-    @GetMapping("/appointments/{id}")
-    public String getAppointmentByPersonId(@PathVariable("id") Integer id, Model model) {
-        List<Appointment> appointments = appointmentService.getAppointmentByPersonID(id);
-        model.addAttribute("appointments", appointments);
-        return "appointment/appointments-by-person";
+    @GetMapping("/appointments/searchByPerson")
+    public String getAppointmentByPersonId( Model model) {
+        model.addAttribute("patients", patientsServiceBean.getAllPatients());
+        return "appointments-by-person";
     }
+    @PostMapping("/appointments")
+    public String processAppointmentSearchByPersonSurname(@RequestParam("patientId") Integer patientId
+    ,Model model){
+        List<Appointment> appointments = appointmentService.getAppointmentByPersonID(patientId);
+        model.addAttribute("appointments", appointments);
+        return "appointments";
+    }
+//    @GetMapping("/patients/searchBySurname")
+//    public String searchPatientsBySurname(Model model) {
+//        model.addAttribute("searchForm", new PatientSearchForm());
+//        return "patient-search-surname";
+//    }
+//
+//    @PostMapping("/patients/searchBySurname")
+//    public String processPatientsSearchBySurname(@ModelAttribute("searchForm") PatientSearchForm searchForm, Model model) {
+//        String surname = searchForm.getLastName();
+//        List<Patient> patients = patientsService.getAllPatientByLastName(surname);
+//        model.addAttribute("patients", patients);
+//        return "patient-search-results";
+//    }
 //получить все диагнозы
     @GetMapping("/diagnosis/{id}")
     public String getAllDiagnosis(@PathVariable("id") Integer id, Model model) {
         Set<String> diagnoses = appointmentService.getAllDiagnoseByPatientID(id);
         model.addAttribute("diagnoses", diagnoses);
-        return "appointment/diagnoses";
+        return "diagnoses";
     }
     //Создать
     @GetMapping("/appointment/create")
@@ -84,7 +104,7 @@ appointment.setDescription("None");
         model.addAttribute("patients", patients);
         model.addAttribute("doctors", doctors);
 
-        return "appointment/appointment-form";
+        return "appointment-form";
     }
     //Обновить Appointment
     @GetMapping("/appointment/update/{id}")
@@ -97,7 +117,7 @@ appointment.setDescription("None");
         model.addAttribute("doctors", doctors);
         Appointment appointment = appointmentService.getAppointmentByID(id);
         model.addAttribute("appointment", appointment);
-        return "appointment/appointment-form-update";
+        return "appointment-form-update";
     }
 // Обновить POST
     @PostMapping("/appointment/update/{id}")
@@ -116,7 +136,7 @@ appointment.setDescription("None");
         model.addAttribute("doctors", doctors);
         Appointment appointment = appointmentService.getAppointmentByID(id);
         model.addAttribute("appointment", appointment);
-        return "appointment/appointment-form-update";
+        return "appointment-form-update";
     }
     // Обновить POST
     @PostMapping("/appointment/update/last/{id}")

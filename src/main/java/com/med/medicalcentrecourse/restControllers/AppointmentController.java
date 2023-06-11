@@ -1,14 +1,24 @@
 package com.med.medicalcentrecourse.restControllers;
 
+import com.med.medicalcentrecourse.model.Appointment;
+import com.med.medicalcentrecourse.service.AppointmentService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
 public class AppointmentController {
-//    private final AppointmentService appointmentService;
-//    private final DoctorServiceBean doctorServiceBean;
-//    private final PatientsServiceBean patientsServiceBean;
+    private final AppointmentService appointmentService;
+    @GetMapping("/appointmentbefore")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Appointment> getAllAppointment(){
+        return appointmentService.getAllAppointmentBeforeNow();
+    }
 //    @PutMapping("/appointment/{id}")
 //    @ResponseStatus(HttpStatus.OK)
 //    public Appointment refreshDoctor(@PathVariable("id") Integer id, @RequestBody Appointment appointment){
