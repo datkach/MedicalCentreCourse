@@ -1,0 +1,170 @@
+<!-- doctor-details.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Last Appointments</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+      body {
+            margin: 0;
+            font-family: 'IBM Plex Sans', sans-serif;
+      }
+
+      ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 20%;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+      }
+      
+      li a {
+            display: block;
+            color: #a8a8a8;
+            padding: 8px 16px;
+            text-decoration: none;
+      }
+        li a.logo {
+            display: block;
+            color: #CC14FF;
+            padding: 24px 16px;
+            font-weight: bold;
+          }
+        li a.logo span{
+            font-size: 24px;
+            font-weight: bold;
+        }
+          li a.active {
+              background-color: #CC14FF;
+              color: white;
+          }
+
+          li a:hover:not(.active, .logo) {
+              background-color: #CC14FF;
+              color: white;
+          }
+      .content-container{
+            margin-left:20%;
+            padding:1px 16px;
+            height:100%;
+      }
+      i {
+            padding-right: 12px;
+      
+      }
+      .topnav{
+            overflow: hidden;
+      }
+          .topnav a {
+              float: left;
+              display: block;
+              color: black;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+              font-size: 14px;
+              border-bottom: 3px solid transparent;
+          }
+          .topnav a:hover {
+              border-bottom: 3px solid #CC14FF;
+          }
+
+          .topnav a.active {
+              border-bottom: 3px solid #CC14FF;
+              font-weight: bold;
+              
+          }
+        h1{
+            font-size: 24px;
+        }
+        .table-list{
+            padding:0px 16px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #6e6e6e;  
+        }
+
+        tr:hover {
+            background-color: #c0c0c0;
+        }
+        /*head of table*/
+      th {
+          background-color: #9E0CB8;
+          color: white;
+          font-weight: bold;
+      }
+         /*Button details*/
+      .button {
+          background-color: #CC14FF;
+          border: none;
+          color: white;
+          padding: 2px 8px;
+          text-decoration: none;
+          margin: 4px 2px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+          border-radius: 3px;
+      }
+          .button:hover {
+              background-color: #9E0CB8;
+          }
+  </style>
+</head>
+<body>
+  <ul>
+      <li><a class="logo" th:href="@{/}"><i class="fa-solid fa-staff-snake fa-2xl"></i><span>MHS</span></a></li>
+      <li><a th:href="@{/}"><i class="fa-solid fa-house"></i></i>Main page</a></li>
+      <li><a  th:href="@{/doctors}"><i class="fa-solid fa-user-doctor"></i>Doctor</a></li>
+      <li><a th:href="@{/patients}"><i class="fa-solid fa-user-injured"></i>Patient</a></li>
+      <li><a class="active" th:href="@{/appointments}"><i class="fa-solid fa-sheet-plastic"></i>Appointment</a></li>
+  </ul>
+  <div class="content-container">
+    <div class="topnav">
+        <a  th:href="@{/appointments}">Appointments</a>
+        <a th:href="@{/appointment/create}" class="button">Create New Appointment</a>
+        <a  th:href="@{/appointments/before}" class="button">Get Last Appointments</a>
+        <a th:href="@{/appointments/{id}}" >Appointment By Person</a>
+    </div>
+    <div class="table-list">
+        <h1>List Of Last Appointments</h1>
+        <table>
+            <tr>
+                <th>Patient Name</th>
+                <th>Doctor Name</th>
+                <th>Action Time</th>
+<!--                <th>Description</th>-->
+<!--                <th>Treatment</th>-->
+                <th>Actions</th>
+            </tr>
+            <tr th:each="appointment : ${appointmentsBefore}">
+                <td th:text="${appointment.patients.firstName} +  ${appointment.patients.lastName}"></td>
+                <td th:text="${appointment.doctors.name} +  ${appointment.doctors.surname}"></td>
+                <td th:text="${appointment.actionTime}"></td>
+<!--                <td th:text="${appointment.description}" ></td>-->
+<!--                <td th:text="${appointment.treatment}" ></td>-->
+                <td>  
+                    <a th:href="@{/appointment/last/{id}(id=${appointment.id})}" class="button">Details</a>
+                    <!--<a th:href="@{/appointment/last/{id}(id=${appointment.id})}" class="button">Details</a>
+                    -->
+                </td>
+            </tr>
+        </table>
+    </div>
+  </div>
+</body>
+</html>

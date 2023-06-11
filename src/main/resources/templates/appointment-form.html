@@ -1,0 +1,200 @@
+﻿<!-- doctor-details.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creat New Appointment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 20%;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+        li a {
+            display: block;
+            color: #a8a8a8;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        li a.logo {
+            display: block;
+            color: #CC14FF;
+            padding: 24px 16px;
+            font-weight: bold;
+          }
+        li a.logo span{
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+            li a.active {
+                background-color: #CC14FF;
+                color: white;
+            }
+
+            li a:hover:not(.active, .logo) {
+                background-color: #c0c0c0;
+                color: white;
+            }
+
+        .content-container {
+            margin-left: 20%;
+            padding: 1px 16px;
+            height: 100%;
+        }
+
+        i {
+            padding-right: 12px;
+        }
+
+        .topnav {
+            overflow: hidden;
+        }
+
+            .topnav a {
+                float: left;
+                display: block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 14px;
+                border-bottom: 3px solid transparent;
+            }
+
+                .topnav a:hover {
+                    border-bottom: 3px solid #CC14FF;
+                }
+
+                .topnav a.active {
+                    border-bottom: 3px solid #CC14FF;
+                    font-weight: bold;
+                    color: #3e3e48;
+                }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .form-inf {
+            padding: 0px 16px;
+            width: 35%;
+        }
+
+        input[type=text], input[type=datetime-local], textarea, select {
+            width: 100%;
+            font-size: 14px;
+            padding: 12px 16px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #CC14FF;
+            color: white;
+            padding: 12px 16px;
+            margin-top: 24px;
+            border: none;
+            font-size: 16px;
+            transition-duration: 0.4s;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /*Button details*/
+        .button {
+            background-color: #CC14FF;
+            border: none;
+            color: white;
+            padding: 4px 16px;
+            text-decoration: none;
+            margin-top: 24px;
+            margin-right: 6px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+            input[type=submit]:hover, .button:hover {
+                background-color: #9E0CB8;
+            }
+        /*span{
+            font-weight: bold;
+        }*/
+        .button-container {
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a class="logo" th:href="@{/}"><i class="fa-solid fa-staff-snake fa-2xl"></i><span>MHS</span></a></li>
+        <li><a th:href="@{/}"><i class="fa-solid fa-house"></i></i>Main page</a></li>
+        <li><a  th:href="@{/doctors}"><i class="fa-solid fa-user-doctor"></i>Doctor</a></li>
+        <li><a th:href="@{/patients}"><i class="fa-solid fa-user-injured"></i>Patient</a></li>
+        <li><a class="active" th:href="@{/appointments}"><i class="fa-solid fa-sheet-plastic"></i>Appointment</a></li>
+    </ul>
+    <div class="content-container">
+        <div class="topnav">
+            <a  th:href="@{/appointments}">Appointments</a>
+            <a th:href="@{/appointment/create}" class="button">Create New Appointment</a>
+            <a th:href="@{/appointments/before}" class="button">Get Last Appointments</a>
+            <a class="active" th:href="@{/appointments/{id}}" >Appointment By Person</a>
+        </div>
+        <div class="form-inf">
+            <h1>Create Appointment</h1>
+            <form th:action="@{/appointment}" th:object="${appointment}" method="post">
+
+                <label for="patients">Patient:</label>
+                <select id="patients" name="patients.id">
+                    <option th:each="patient : ${patients}" th:value="${patient.id}" th:text="${patient.lastName}"></option>
+                </select>
+
+                <label for="doctors">Doctor:</label>
+                <select id="doctors" name="doctors.id">
+                    <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name}"></option>
+                </select>
+
+                <label for="actionTime">Action Time:</label>
+                <input type="datetime-local" id="actionTime" th:field="*{actionTime}">
+
+                <label for="description">Description:</label>
+                <textarea name="comments" id="description" th:field="*{description}" maxlength="500"></textarea>
+
+                <label for="treatment">Treatment:</label>
+                <input type="text" id="treatment" th:field="*{treatment}">
+
+                <!--  <div>-->
+                <!--    <label for="description">Description:</label>-->
+                <!--    <input type="text" id="description" th:field="*{description}" >-->
+                <!--  </div>-->
+                <!--  <label for="treatment">Treatment:</label>-->
+                <!--  <input type="text" id="treatment" th:field="*{treatment}" >-->
+
+                <input class="button" type="submit" value="Save">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
