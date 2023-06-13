@@ -3,6 +3,7 @@ package com.med.medicalcentrecourse.service;
 import com.med.medicalcentrecourse.model.Doctor;
 import com.med.medicalcentrecourse.model.enums.Specialization;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface DoctorService {
@@ -16,4 +17,5 @@ public interface DoctorService {
     Doctor updateById(Integer id, Doctor doctor);
     void removeById(Integer id);
     void removeAll();
+    public boolean checkDate(LocalDate date);
 }

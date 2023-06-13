@@ -146,13 +146,13 @@ appointment.setDescription("None");
         return "redirect:/appointments-last";
     }
 //2 метода удаления
-    @DeleteMapping("/appointment/{id}")
+    @GetMapping("/appointment/delete/{id}")
     public String removeAppointmentById(@PathVariable Integer id) {
         appointmentService.removeById(id);
         return "redirect:/appointments";
     }
 
-    @DeleteMapping("/appointment")
+    @GetMapping("/appointment")
     public String removeAllAppointments() {
         appointmentService.removeAll();
         return "redirect:/appointments";

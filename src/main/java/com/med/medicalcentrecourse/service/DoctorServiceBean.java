@@ -15,8 +15,6 @@ import java.util.List;
 public class DoctorServiceBean implements DoctorService {
 private final DoctorRepository doctorRepository;
     public Doctor create(Doctor doctor) {
-        if(checkDate(doctor.getBirthdayDate()))
-            throw new NullPointerException("Not true Date");
        return doctorRepository.save(doctor);
     }
     public Doctor getDoctorByID(Integer id){
@@ -66,7 +64,7 @@ private final DoctorRepository doctorRepository;
     public void removeAll() {
         doctorRepository.deleteAll();
     }
-    private boolean checkDate(LocalDate date){
+    public boolean checkDate(LocalDate date){
         return date.isAfter(LocalDate.now())
                 || date.getYear() < LocalDate.now().minusYears(150).getYear();
     }

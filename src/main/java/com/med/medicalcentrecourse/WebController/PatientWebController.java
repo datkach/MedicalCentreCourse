@@ -90,6 +90,8 @@ public class PatientWebController {
     }
     @PostMapping("/patients/create")
     public String processCreatePatientForm(@ModelAttribute("patient") Patient patient) {
+        if(patientsService.checkDate(patient.getBirthDate()))
+            return "error-date-patient";
         patientsService.create(patient);
         return "redirect:/patients";
     }
@@ -101,6 +103,8 @@ public class PatientWebController {
     }
     @PostMapping("/patients/update/{id}")
     public String processUpdatePatientForm(@PathVariable Integer id, @ModelAttribute("patient") Patient patient) {
+        if(patientsService.checkDate(patient.getBirthDate()))
+            return "error-date-patient";
         patientsService.updateById(id, patient);
         return "redirect:/patients";
     }

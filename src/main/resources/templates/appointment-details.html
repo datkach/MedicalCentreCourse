@@ -133,9 +133,9 @@
   <div class="content-container">
     <div class="topnav">
         <a  th:href="@{/appointments}">Back to List</a>
+        <a th:href="@{/appointments/searchByPerson}" >Appointment By Person</a>
         <a th:href="@{/appointment/create}" class="button">Create New Appointment</a>
         <a th:href="@{/appointments/before}" class="button">Get Last Appointments</a>
-        <a th:href="@{/appointments/{id}}" >Appointment By Person</a>
     </div>
     <div class="details-inf">
         <p th:text="'ID: ' + ${appointment.id}"></p>
@@ -144,7 +144,7 @@
         <p th:text="'Appointment time: ' + ${appointment.actionTime}"></p>
         <div class="button-container">
             <a th:href="@{/appointment/update/{id}(id=${appointment.id})}" class="button">Edit</a>
-            <a th:href="@{/appointment/delete/{id}(id=${appointment.id})}" class="button" onclick="return confirm('Are you sure you want to delete this doctor?')">Delete</a>
+            <a th:href="@{/appointment/delete/{id}(id=${appointment.id})}" class="button" onclick="return confirm('Are you sure you want to delete this appointment?')">Delete</a>
         </div>
         <!--
         <p th:text="'ID: ' + ${appointment.id}"></p>

@@ -1,0 +1,127 @@
+<!-- doctor-details.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+    body {
+      margin: 0;
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+    *{
+      transition: all 0.6s;
+    }
+
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      width: 20%;
+      background-color: #f1f1f1;
+      position: fixed;
+      height: 100%;
+      overflow: auto;
+    }
+
+    li a {
+      display: block;
+      color: #a8a8a8;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+    li a.logo {
+      display: block;
+      color: #CC14FF;
+      padding: 24px 16px;
+      font-weight: bold;
+    }
+    li a.logo span{
+      font-size: 24px;
+      font-weight: bold;
+    }
+    li a.active {
+      background-color: #CC14FF;
+      color: white;
+    }
+
+    li a:hover:not(.active, .logo) {
+      background-color: #c0c0c0;
+      color: white;
+    }
+    .content-container{
+      margin-left:20%;
+      padding:1px 16px;
+      height:100%;
+
+    }
+    .error-container{
+      margin: auto;
+      margin-top: 20%;
+      /*background-color: #a8a8a8;*/
+    }
+    .error-message{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+    }
+    .error-message h1{
+      font-size: 100px;
+      padding-right: 12px;
+      margin: 0px;
+
+    }
+    .error-message p{
+      font-size: 24px;
+      margin: 0px;
+
+    }
+    .error-message a{
+      font-size: 24px;
+      text-decoration: none;
+      color: black;
+      border-bottom: 3px solid transparent;
+      padding: 14px 16px;
+
+    }
+    .error-message a:hover{
+      border-bottom: 3px solid #CC14FF;
+
+    }
+    .error-message span {
+      color: #CC14FF;
+      font-weight: 500;
+    }
+    i {
+      padding-right: 12px;
+
+    }
+
+  </style>
+</head>
+<body>
+<ul>
+  <li><a class="logo" href="menu.html"><i class="fa-solid fa-staff-snake fa-2xl"></i><span>MHS</span></a></li>
+  <li><a href="menu.html"><i class="fa-solid fa-house"></i></i>Main page</a></li>
+  <li><a href="doctors.html"><i class="fa-solid fa-user-doctor"></i>Doctor</a></li>
+  <li><a href="patients.html"><i class="fa-solid fa-user-injured"></i>Patient</a></li>
+  <li><a href="appointments.html"><i class="fa-solid fa-sheet-plastic"></i>Appointment</a></li>
+</ul>
+<div class="content-container">
+  <div class="error-container">
+    <div class="error-message">
+      <p>Invalid date entered!</p>
+      <h1>ERROR <span>DATE</span></h1>
+      <a th:href="@{/doctors/create}"><i class="fa-solid fa-arrow-left"></i>Back to the previous page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

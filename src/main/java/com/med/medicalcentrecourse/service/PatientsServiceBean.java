@@ -85,7 +85,7 @@ public class PatientsServiceBean implements PatientsService{
     public void removeAll() {
         patientsRepository.deleteAll();
     }
-    private boolean checkDate(LocalDate date){
+    public boolean checkDate(LocalDate date){
         return date.isAfter(LocalDate.now())
                 || date.getYear() < LocalDate.now().minusYears(150).getYear();
     }

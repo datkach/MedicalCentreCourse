@@ -79,6 +79,8 @@ public String searchDoctorsBySurname(Model model) {
     }
     @PostMapping("/doctors/create")
     public String processCreateDoctorForm(@ModelAttribute("doctor") Doctor doctor) {
+        if(doctorService.checkDate(doctor.getBirthdayDate()))
+            return "error-date-doctor";
         doctorService.create(doctor);
         return "redirect:/doctors";
     }
@@ -91,6 +93,8 @@ public String searchDoctorsBySurname(Model model) {
     }
     @PostMapping("/doctors/update/{id}")
     public String processUpdateDoctorForm(@PathVariable Integer id, @ModelAttribute("doctor") Doctor doctor) {
+        if(doctorService.checkDate(doctor.getBirthdayDate()))
+            return "error-date-doctor";
         doctorService.updateById(id, doctor);
         return "redirect:/doctors";
     }

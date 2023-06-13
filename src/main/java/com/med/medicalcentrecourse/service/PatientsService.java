@@ -2,6 +2,7 @@ package com.med.medicalcentrecourse.service;
 
 import com.med.medicalcentrecourse.model.Patient;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface PatientsService {
@@ -17,4 +18,5 @@ public interface PatientsService {
     Patient updateById(Integer id, Patient patient);
     void removeById(Integer id);
     void removeAll();
+    public boolean checkDate(LocalDate date);
 }
