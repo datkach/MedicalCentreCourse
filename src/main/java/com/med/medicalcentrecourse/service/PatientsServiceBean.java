@@ -20,6 +20,8 @@ public class PatientsServiceBean implements PatientsService{
     public Patient create(Patient patient) {
         if(checkDate(patient.getBirthDate()))
             throw new NullPointerException("Not true Date");
+        if (checkDoctorSurname(patient.getDoctorSurname()))
+            throw new NullPointerException("Not true Surname");
         return patientsRepository.save(patient);
     }
     @Override
@@ -89,4 +91,8 @@ public class PatientsServiceBean implements PatientsService{
         return date.isAfter(LocalDate.now())
                 || date.getYear() < LocalDate.now().minusYears(150).getYear();
     }
+    public boolean checkDoctorSurname(String patient){
+        return doctorService.getAllDoctorsBySurname(patient).isEmpty();
+    }
+
 }

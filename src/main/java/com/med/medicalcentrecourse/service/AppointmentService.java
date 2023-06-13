@@ -13,6 +13,7 @@ public interface AppointmentService {
     Appointment updateById(Integer id,Appointment appointment);
      void removeById(Integer id);
      void removeAll();
-    Set<String> getAllDiagnoseByPatientID(Integer id);
     List<Appointment> getAllAppointmentBeforeNow();
-    }
+    Set<String> getAllDiagnoseByPatientID(Integer id);
+
+}

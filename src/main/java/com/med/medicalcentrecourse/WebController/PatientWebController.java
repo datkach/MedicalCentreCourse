@@ -22,6 +22,12 @@ public class PatientWebController {
         model.addAttribute("patients", patients);
         return "patients";
     }
+    @GetMapping("/patients/ordered")
+    public String getAllPatientsOrdered(Model model) {
+        List<Patient> patients = patientsService.getALlOrderedAsc();
+        model.addAttribute("patients", patients);
+        return "patients";
+    }
     // получаем доктора по id
     @GetMapping("/patients/{id}")
     public String getPatientById(@PathVariable Integer id, Model model) {
@@ -92,6 +98,8 @@ public class PatientWebController {
     public String processCreatePatientForm(@ModelAttribute("patient") Patient patient) {
         if(patientsService.checkDate(patient.getBirthDate()))
             return "error-date-patient";
+        if(patientsService.checkDoctorSurname(patient.getDoctorSurname()))
+            return "error-doctor-surname-by-patient";
         patientsService.create(patient);
         return "redirect:/patients";
     }
@@ -105,6 +113,8 @@ public class PatientWebController {
     public String processUpdatePatientForm(@PathVariable Integer id, @ModelAttribute("patient") Patient patient) {
         if(patientsService.checkDate(patient.getBirthDate()))
             return "error-date-patient";
+        if(patientsService.checkDoctorSurname(patient.getDoctorSurname()))
+            return "error-doctor-surname-by-patient";
         patientsService.updateById(id, patient);
         return "redirect:/patients";
     }

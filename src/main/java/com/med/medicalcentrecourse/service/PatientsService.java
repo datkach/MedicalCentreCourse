@@ -18,5 +18,6 @@ public interface PatientsService {
     Patient updateById(Integer id, Patient patient);
     void removeById(Integer id);
     void removeAll();
-    public boolean checkDate(LocalDate date);
+     boolean checkDate(LocalDate date);
+    boolean checkDoctorSurname(String patient);
 }
