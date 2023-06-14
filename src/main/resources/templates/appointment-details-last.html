@@ -141,8 +141,8 @@
     </div>
     <div class="details-inf">
         <h1>Last Appointment Details</h1>
-        <p th:text="'Patients: ' + ${appointment.patients.lastName} + ${appointment.patients.firstName}"></p>
-        <p th:text="'Doctor: ' + ${appointment.doctors.name} + ${appointment.doctors.surname}"></p>
+        <p th:text="'Patients: ' + ${appointment.patients.lastName} + '' + ${appointment.patients.firstName}"></p>
+        <p th:text="'Doctor: ' + ${appointment.doctors.name} + ' ' + ${appointment.doctors.surname}"></p>
         <p th:text="'Appointment time: ' + ${appointment.actionTime}"></p>
         <p th:text="'Description: ' + ${appointment.description}"></p>
         <p th:text="'Treatment: ' + ${appointment.treatment}"></p>

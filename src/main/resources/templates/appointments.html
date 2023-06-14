@@ -149,8 +149,8 @@
                 <th>Actions</th>
             </tr>
             <tr th:each="appointment : ${appointments}">
-                <td th:text="${appointment.patients.firstName} +  ${appointment.patients.lastName}"></td>
-                <td th:text="${appointment.doctors.name} +  ${appointment.doctors.surname}"></td>
+                <td th:text="${appointment.patients.firstName } + ' ' + ${appointment.patients.lastName}"></td>
+                <td th:text="${appointment.doctors.name } + ' ' +  ${appointment.doctors.surname}"></td>
                 <td th:text="${appointment.actionTime}"></td>
                 <td>  
                     <a th:href="@{/appointment/{id}(id=${appointment.id})}" class="button">Details</a>

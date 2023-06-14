@@ -152,8 +152,8 @@
                 <th>Actions</th>
             </tr>
             <tr th:each="appointment : ${appointmentsBefore}">
-                <td th:text="${appointment.patients.firstName} +  ${appointment.patients.lastName}"></td>
-                <td th:text="${appointment.doctors.name} +  ${appointment.doctors.surname}"></td>
+                <td th:text="${appointment.patients.firstName} + ' ' +  ${appointment.patients.lastName}"></td>
+                <td th:text="${appointment.doctors.name} + ' ' + ${appointment.doctors.surname}"></td>
                 <td th:text="${appointment.actionTime}"></td>
 <!--                <td th:text="${appointment.description}" ></td>-->
 <!--                <td th:text="${appointment.treatment}" ></td>-->

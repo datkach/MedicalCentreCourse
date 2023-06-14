@@ -167,7 +167,7 @@
             
             <label for="doctors">Doctor:</label>
             <select id="doctors" name="doctors.id">
-              <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name}"></option>
+              <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.surname}"></option>
             </select>
             
             <label for="actionTime">Action Time:</label>

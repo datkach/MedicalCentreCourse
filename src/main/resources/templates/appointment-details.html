@@ -139,8 +139,8 @@
     </div>
     <div class="details-inf">
         <p th:text="'ID: ' + ${appointment.id}"></p>
-        <p th:text="'Patients: ' + ${appointment.patients.lastName} + ${appointment.patients.firstName}"></p>
-        <p th:text="'Doctor: ' + ${appointment.doctors.name} + ${appointment.doctors.surname}"></p>
+        <p th:text="'Patients: ' + ${appointment.patients.lastName} + ' ' + ${appointment.patients.firstName}"></p>
+        <p th:text="'Doctor: ' + ${appointment.doctors.name} + ' ' + ${appointment.doctors.surname}"></p>
         <p th:text="'Appointment time: ' + ${appointment.actionTime}"></p>
         <div class="button-container">
             <a th:href="@{/appointment/update/{id}(id=${appointment.id})}" class="button">Edit</a>
