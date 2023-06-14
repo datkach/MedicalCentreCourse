@@ -137,11 +137,11 @@
 </head>
 <body>
   <ul>
-    <li><a class="logo" href="menu.html"><i class="fa-solid fa-staff-snake fa-2xl"></i><span>MHS</span></a></li>
-    <li><a  href="menu.html"><i class="fa-solid fa-house"></i></i>Main page</a></li>
-    <li><a href="doctors.html"><i class="fa-solid fa-user-doctor"></i>Doctor</a></li>
-    <li><a href="patients.html"><i class="fa-solid fa-user-injured"></i>Patient</a></li>
-    <li><a class="active" href="appointments.html"><i class="fa-solid fa-sheet-plastic"></i>Appointment</a></li>
+      <li><a class="logo" th:href="@{/}"><i class="fa-solid fa-staff-snake fa-2xl"></i><span>MHS</span></a></li>
+      <li><a th:href="@{/}"><i class="fa-solid fa-house"></i></i>Main page</a></li>
+      <li><a  th:href="@{/doctors}"><i class="fa-solid fa-user-doctor"></i>Doctor</a></li>
+      <li><a th:href="@{/patients}"><i class="fa-solid fa-user-injured"></i>Patient</a></li>
+      <li><a class="active" th:href="@{/appointments}"><i class="fa-solid fa-sheet-plastic"></i>Appointment</a></li>
   </ul>
       <div class="content-container">
           <div class="topnav">
