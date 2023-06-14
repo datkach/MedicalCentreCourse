@@ -16,31 +16,35 @@ import java.util.List;
 @Controller
 @AllArgsConstructor
 public class PatientWebController {
+    public static final String PATIENTS = "patients";
+    public static final String SEARCH_FORM = "searchForm";
+    public static final String PATIENT_SEARCH_RESULTS = "patient-search-results";
+    public static final String REDIRECT_PATIENTS = "redirect:/patients";
     private final PatientsService patientsService;
     private final DoctorService doctorService;
     @GetMapping("/patients")
     public String getAllPatients(Model model) {
         List<Patient> patients = patientsService.getAllPatients();
-        model.addAttribute("patients", patients);
-        return "patients";
+        model.addAttribute(PATIENTS, patients);
+        return PATIENTS;
     }
     @GetMapping("/patients/ordered")
     public String getAllPatientsOrdered(Model model) {
         List<Patient> patients = patientsService.getALlOrderedAsc();
-        model.addAttribute("patients", patients);
-        return "patients";
+        model.addAttribute(PATIENTS, patients);
+        return PATIENTS;
     }
     // получаем доктора по id
     @GetMapping("/patients/{id}")
     public String getPatientById(@PathVariable Integer id, Model model) {
         Patient patient = patientsService.getPatientByID(id);
-        model.addAttribute("patient", patient);
+        model.addAttribute(PATIENTS, patient);
         return "patient-details";
     }
     //пошук по фамилии
     @GetMapping("/patients/searchBySurname")
     public String searchPatientsBySurname(Model model) {
-        model.addAttribute("searchForm", new PatientSearchForm());
+        model.addAttribute(SEARCH_FORM, new PatientSearchForm());
         return "patient-search-surname";
     }
 
@@ -48,13 +52,13 @@ public class PatientWebController {
     public String processPatientsSearchBySurname(@ModelAttribute("searchForm") PatientSearchForm searchForm, Model model) {
         String surname = searchForm.getLastName();
         List<Patient> patients = patientsService.getAllPatientByLastName(surname);
-        model.addAttribute("patients", patients);
-        return "patient-search-results";
+        model.addAttribute(PATIENTS, patients);
+        return PATIENT_SEARCH_RESULTS;
     }
     //пошук по имени
     @GetMapping("/patients/searchByName")
     public String searchPatientsByName(Model model) {
-        model.addAttribute("searchForm", new PatientSearchForm());
+        model.addAttribute(SEARCH_FORM, new PatientSearchForm());
         return "patient-search-name";
     }
 
@@ -62,36 +66,35 @@ public class PatientWebController {
     public String processDoctorSearchByName(@ModelAttribute("searchForm") PatientSearchForm searchForm, Model model) {
         String name = searchForm.getFirstName();
         List<Patient> patients = patientsService.getAllPatientsByFirstName(name);
-        model.addAttribute("patients", patients);
-        return "patient-search-results";
+        model.addAttribute(PATIENTS, patients);
+        return PATIENT_SEARCH_RESULTS;
     }
     // пошук по специализации
     @GetMapping("patients/searchByPhoneNumber")
     public String searchPatientsByPhoneNumber(Model model) {
-        model.addAttribute("searchForm" , new PatientSearchForm());
+        model.addAttribute(SEARCH_FORM, new PatientSearchForm());
         return "patient-search-phone";
     }
     @PostMapping("/patients/searchByPhoneNumber")
     public String processPatientsByPhoneNumber(@ModelAttribute("searchForm") PatientSearchForm searchForm, Model model){
         String phoneNumber = searchForm.getPhoneNumber();
         List<Patient> patients = patientsService.getAllPatientByPhoneNumber(phoneNumber);
-        model.addAttribute("patients",patients);
-        return "patient-search-results";
+        model.addAttribute(PATIENTS,patients);
+        return PATIENT_SEARCH_RESULTS;
     }
     @GetMapping("patients/searchPatientsByDoctor")
     public String searchDoctorByPatientCart(Model model) {
-        model.addAttribute("searchForm" , new PatientSearchForm());
+        model.addAttribute(SEARCH_FORM , new PatientSearchForm());
         return "patient-search-doctor";
     }
     @PostMapping("/patients/searchPatientsByDoctor")
     public String processDoctorByPatientCart(@ModelAttribute("searchForm") PatientSearchForm searchForm, Model model){
         String doctorSurname = searchForm.getDoctorSurname();
         List<Patient> patients;
-        if (doctorService.getAllDoctorsBySurname(doctorSurname).isEmpty())
-            return "patient-search-results";
+        if (!doctorService.getAllDoctorsBySurname(doctorSurname).isEmpty()){
         patients = patientsService.getAllPatientsByDoctor(doctorSurname);
-        model.addAttribute("patients",patients);
-        return "patient-search-results";
+        model.addAttribute(PATIENTS,patients);}
+        return PATIENT_SEARCH_RESULTS;
     }
     //форма создания и её обработка
     @GetMapping("/patients/create")
@@ -106,7 +109,7 @@ public class PatientWebController {
         if(patientsService.checkDoctorSurname(patient.getDoctorSurname()))
             return "error-doctor-surname-by-patient";
         patientsService.create(patient);
-        return "redirect:/patients";
+        return REDIRECT_PATIENTS;
     }
     @GetMapping("/patients/update/{id}")
     public String showUpdatePatientsForm(@PathVariable Integer id, Model model) {
@@ -121,12 +124,12 @@ public class PatientWebController {
         if(patientsService.checkDoctorSurname(patient.getDoctorSurname()))
             return "error-doctor-surname-by-patient";
         patientsService.updateById(id, patient);
-        return "redirect:/patients";
+        return REDIRECT_PATIENTS;
     }
     // вилучення пациента по id
     @GetMapping("/patients/delete/{id}")
     public String deletePatient(@PathVariable Integer id) {
         patientsService.removeById(id);
-        return "redirect:/patients";
+        return REDIRECT_PATIENTS;
     }
 }

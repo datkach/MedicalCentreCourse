@@ -14,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
-public class DoctorRepositoryTest {
+class DoctorRepositoryTest {
 
     @Autowired
     private DoctorRepository doctorRepository;
 
     @Test
-    public void testSaveDoctor() {
+    void testSaveDoctor() {
         // Создание объекта Doctor
         Doctor doctor = new Doctor();
         doctor.setName("John");
@@ -37,7 +37,7 @@ public class DoctorRepositoryTest {
     }
 
     @Test
-    public void testFindAllByName() {
+    void testFindAllByName() {
         // Создание тестовых врачей
         Doctor doctor1 = new Doctor();
         doctor1.setName("John");
@@ -62,7 +62,7 @@ public class DoctorRepositoryTest {
     }
 
     @Test
-    public void testFindAllBySurname() {
+    void testFindAllBySurname() {
         // Создание тестовых врачей
         Doctor doctor1 = new Doctor();
         doctor1.setName("John");
@@ -88,7 +88,7 @@ public class DoctorRepositoryTest {
     }
 
     @Test
-    public void testFindByNameIgnoreCaseAndSurnameIgnoreCaseAndSpecialization() {
+    void testFindByNameIgnoreCaseAndSurnameIgnoreCaseAndSpecialization() {
         // Создание тестовых врачей
         Doctor doctor1 = new Doctor();
         doctor1.setName("John");
@@ -115,7 +115,7 @@ public class DoctorRepositoryTest {
     }
 
     @Test
-    public void testFindAllBySpecialization() {
+    void testFindAllBySpecialization() {
         // Создание тестовых врачей
         Doctor doctor1 = new Doctor();
         doctor1.setName("John");
@@ -140,7 +140,7 @@ public class DoctorRepositoryTest {
     }
 
     @Test
-    public void testDeleteDoctor() {
+    void testDeleteDoctor() {
         // Создание тестового врача
         Doctor doctor = new Doctor();
         doctor.setName("John");

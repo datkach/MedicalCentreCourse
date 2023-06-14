@@ -13,7 +13,7 @@ import java.util.Date;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(ResourcePrivateException.class)
-    public ResponseEntity<?> resourcePrivateException(WebRequest request){
+    public ResponseEntity<ErrorDetails> resourcePrivateException(WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails(new Date(), "It`s private resources",
                 request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.LOCKED);
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> globalExceptionHandler(Exception ex, WebRequest request) {
+    public ResponseEntity<ErrorDetails> globalExceptionHandler(Exception ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }

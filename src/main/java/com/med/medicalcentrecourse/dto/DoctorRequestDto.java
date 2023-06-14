@@ -1,7 +1,6 @@
 package com.med.medicalcentrecourse.dto;
 
 import com.med.medicalcentrecourse.model.enums.Specialization;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 

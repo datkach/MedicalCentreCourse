@@ -14,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
-public class PatientsRepositoryTest {
+class PatientsRepositoryTest {
 
     @Autowired
     private PatientsRepository patientsRepository;
 
     @Test
-    public void testSavePatient() {
+    void testSavePatient() {
         // Создание объекта Patient
         Patient patient = new Patient();
         patient.setFirstName("John");
@@ -41,7 +41,7 @@ public class PatientsRepositoryTest {
     }
 
     @Test
-    public void testFindAllByDoctorSurname() {
+    void testFindAllByDoctorSurname() {
         // Создание тестовых пациентов
         Patient patient1 = new Patient();
         patient1.setFirstName("John");
@@ -76,7 +76,7 @@ public class PatientsRepositoryTest {
 
     // Тест для метода findAllByOrderByLastNameAsc
     @Test
-    public void testFindAllByOrderByLastNameAsc() {
+    void testFindAllByOrderByLastNameAsc() {
         // Создание тестовых пациентов
         Patient patient1 = new Patient();
         patient1.setFirstName("John");
@@ -110,7 +110,7 @@ public class PatientsRepositoryTest {
 
     // Тест для метода findAllByLastName
     @Test
-    public void testFindAllByLastName() {
+    void testFindAllByLastName() {
         // Создание тестовых пациентов
         Patient patient1 = new Patient();
         patient1.setFirstName("John");
@@ -143,7 +143,7 @@ public class PatientsRepositoryTest {
     }
     // Тест для метода findAllByFirstName
     @Test
-    public void testFindAllByFirstName() {
+    void testFindAllByFirstName() {
         // Создание тестовых пациентов
         Patient patient1 = new Patient();
         patient1.setFirstName("John");
@@ -177,7 +177,7 @@ public class PatientsRepositoryTest {
 
     // Тест для метода findAllByPhoneNumber
     @Test
-    public void testFindAllByPhoneNumber() {
+    void testFindAllByPhoneNumber() {
         // Создание тестовых пациентов
         Patient patient1 = new Patient();
         patient1.setFirstName("John");
@@ -213,7 +213,7 @@ public class PatientsRepositoryTest {
     // findAllByLastName, findAllByFirstName, findAllByPhoneNumber.
 
     @Test
-    public void testDeletePatient() {
+    void testDeletePatient() {
         // Создание тестового пациента
         Patient patient = new Patient();
         patient.setFirstName("John");

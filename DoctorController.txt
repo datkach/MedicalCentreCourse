@@ -1,18 +1,3 @@
-package com.med.medicalcentrecourse.restControllers;
-
-import com.med.medicalcentrecourse.dto.DoctorRequestDto;
-import com.med.medicalcentrecourse.dto.DoctorResponseDto;
-import com.med.medicalcentrecourse.model.Doctor;
-import com.med.medicalcentrecourse.model.enums.Specialization;
-import com.med.medicalcentrecourse.service.DoctorService;
-import com.med.medicalcentrecourse.util.mapper.DoctorMapper;
-import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
 @RestController
 @AllArgsConstructor
 public class DoctorController {
