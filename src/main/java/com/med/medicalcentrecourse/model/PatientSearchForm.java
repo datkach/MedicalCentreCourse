@@ -1,7 +1,5 @@
 package com.med.medicalcentrecourse.model;
 
-import com.med.medicalcentrecourse.model.enums.Specialization;
-
 public class PatientSearchForm {
     private String firstName;
     private String lastName;

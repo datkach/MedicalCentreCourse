@@ -1,6 +1,5 @@
 package com.med.medicalcentrecourse.repository;
 
-import com.med.medicalcentrecourse.model.Doctor;
 import com.med.medicalcentrecourse.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

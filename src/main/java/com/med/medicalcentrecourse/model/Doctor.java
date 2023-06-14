@@ -2,8 +2,6 @@ package com.med.medicalcentrecourse.model;
 
 import com.med.medicalcentrecourse.model.enums.Specialization;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDate;
