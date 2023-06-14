@@ -38,7 +38,7 @@ public class PatientWebController {
     @GetMapping("/patients/{id}")
     public String getPatientById(@PathVariable Integer id, Model model) {
         Patient patient = patientsService.getPatientByID(id);
-        model.addAttribute(PATIENTS, patient);
+        model.addAttribute("patient", patient);
         return "patient-details";
     }
     //пошук по фамилии

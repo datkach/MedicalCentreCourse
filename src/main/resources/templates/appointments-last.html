@@ -147,20 +147,14 @@
                 <th>Patient Name</th>
                 <th>Doctor Name</th>
                 <th>Action Time</th>
-<!--                <th>Description</th>-->
-<!--                <th>Treatment</th>-->
                 <th>Actions</th>
             </tr>
             <tr th:each="appointment : ${appointmentsBefore}">
                 <td th:text="${appointment.patients.firstName} + ' ' +  ${appointment.patients.lastName}"></td>
                 <td th:text="${appointment.doctors.name} + ' ' + ${appointment.doctors.surname}"></td>
                 <td th:text="${appointment.actionTime}"></td>
-<!--                <td th:text="${appointment.description}" ></td>-->
-<!--                <td th:text="${appointment.treatment}" ></td>-->
                 <td>  
                     <a th:href="@{/appointment/last/{id}(id=${appointment.id})}" class="button">Details</a>
-                    <!--<a th:href="@{/appointment/last/{id}(id=${appointment.id})}" class="button">Details</a>
-                    -->
                 </td>
             </tr>
         </table>
