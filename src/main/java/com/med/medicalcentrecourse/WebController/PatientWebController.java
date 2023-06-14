@@ -2,6 +2,7 @@ package com.med.medicalcentrecourse.WebController;
 
 import com.med.medicalcentrecourse.model.Patient;
 import com.med.medicalcentrecourse.model.PatientSearchForm;
+import com.med.medicalcentrecourse.service.DoctorService;
 import com.med.medicalcentrecourse.service.PatientsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PatientWebController {
     private final PatientsService patientsService;
+    private final DoctorService doctorService;
     @GetMapping("/patients")
     public String getAllPatients(Model model) {
         List<Patient> patients = patientsService.getAllPatients();
@@ -84,7 +86,10 @@ public class PatientWebController {
     @PostMapping("/patients/searchPatientsByDoctor")
     public String processDoctorByPatientCart(@ModelAttribute("searchForm") PatientSearchForm searchForm, Model model){
         String doctorSurname = searchForm.getDoctorSurname();
-        List<Patient> patients = patientsService.getAllPatientsByDoctor(doctorSurname);
+        List<Patient> patients;
+        if (doctorService.getAllDoctorsBySurname(doctorSurname).isEmpty())
+            return "patient-search-results";
+        patients = patientsService.getAllPatientsByDoctor(doctorSurname);
         model.addAttribute("patients",patients);
         return "patient-search-results";
     }

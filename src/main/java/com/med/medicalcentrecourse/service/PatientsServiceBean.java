@@ -40,9 +40,10 @@ public class PatientsServiceBean implements PatientsService{
 
     @Override
     public List<Patient> getAllPatientsByDoctor(String surname) {
-        Doctor doctor = doctorService.getAllDoctorsBySurname(surname).stream()
-                .filter(e -> e.getSpecialization().equals(Specialization.FamilyDoctor))
-                .findFirst().orElseThrow(ResourceNotFoundException:: new);
+        Doctor doctor = doctorService.getAllDoctorsBySurname(surname).stream().findFirst().get();
+//        .stream()
+//                .filter(e -> e.getSpecialization().equals(Specialization.FamilyDoctor))
+//                .findFirst().orElseThrow(ResourceNotFoundException:: new)
         return patientsRepository.findAllByDoctorSurname(doctor.getSurname());
     }
 
